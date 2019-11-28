@@ -1,0 +1,6 @@
+C:\Users\paste\OneDrive\Рабочий стол\paralel_servers\Servers_paralel\Server2\bin\Debug\Server2.exe.config
+C:\Users\paste\OneDrive\Рабочий стол\paralel_servers\Servers_paralel\Server2\bin\Debug\Server2.exe
+C:\Users\paste\OneDrive\Рабочий стол\paralel_servers\Servers_paralel\Server2\bin\Debug\Server2.pdb
+C:\Users\paste\OneDrive\Рабочий стол\paralel_servers\Servers_paralel\Server2\obj\Debug\Server2.csprojAssemblyReference.cache
+C:\Users\paste\OneDrive\Рабочий стол\paralel_servers\Servers_paralel\Server2\obj\Debug\Server2.exe
+C:\Users\paste\OneDrive\Рабочий стол\paralel_servers\Servers_paralel\Server2\obj\Debug\Server2.pdb

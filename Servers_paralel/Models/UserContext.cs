@@ -11,6 +11,7 @@ namespace Servers_paralel.Models
         public UserContext() : base("DefaultConnection") { }
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
+        public DbSet<Info> Infos { get; set; }
     }
 
     public class UserDbInitializer : DropCreateDatabaseAlways<UserContext>

@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.Mvc; 
+using System.Web.Mvc;
 using System.Web.Security;
 using System.Net;
 using Servers_paralel.Models;
+using System.Net.Sockets;
+using System.Text;
 
 namespace Servers_paralel.Controllers
 {
@@ -87,5 +89,62 @@ namespace Servers_paralel.Controllers
             return View(model);
         }
 
+        public ActionResult Logoff()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        public ActionResult MakeTask()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult MakeTask(Info model)
+        {
+            byte[] data = Encoding.Unicode.GetBytes(model.bytes);
+            string address = "127.0.0.1"; // адрес сервера 
+            Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            int port = 0;
+            //var a = model.bytes;
+            if (model.bytes[0] == '1')
+            {
+                port = 8005; // порт сервера   
+            }
+            else
+            {
+                port = 8006;
+            }
+            IPEndPoint ipPoint = new IPEndPoint(IPAddress.Parse(address), port);
+
+            socket.Connect(ipPoint);
+            socket.Send(data);
+
+            socket.Shutdown(SocketShutdown.Both);
+            socket.Close();
+            return RedirectToAction("Index");
+        }
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult MakeTask2(Info model)
+        //{
+        //    int port = 8006; // порт сервера
+        //    string address = "127.0.0.1"; // адресa сервера
+
+        //    IPEndPoint ipPoint = new IPEndPoint(IPAddress.Parse(address), port);
+        //    Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+        //    socket.Connect(ipPoint);
+
+        //    byte[] data = Encoding.Unicode.GetBytes(model.bytes);
+        //    socket.Send(data);
+
+        //    socket.Shutdown(SocketShutdown.Both);
+        //    socket.Close();
+        //    return RedirectToAction("Index");
+        //}
     }
 }

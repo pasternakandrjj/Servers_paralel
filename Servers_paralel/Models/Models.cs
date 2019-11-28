@@ -37,4 +37,12 @@ namespace Servers_paralel.Models
         [Range(1, 100)]
         public int Age { get; set; }
     }
+    public class Info
+    {
+        public int Id { get; set; }
+
+        [Required]
+        [StringLength(255, MinimumLength = 1, ErrorMessage = "Password length > 5 && < 20")]
+        public string bytes { get; set; }
+    }
 }
