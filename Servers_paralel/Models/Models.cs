@@ -44,5 +44,13 @@ namespace Servers_paralel.Models
         [Required]
         [StringLength(255, MinimumLength = 1, ErrorMessage = "Password length > 5 && < 20")]
         public string bytes { get; set; }
+
+        [Required]
+        public int WhichServer { get; set; }
+        public Info() { }
+        public Info(string bytes)
+        {
+            this.bytes = bytes;
+        }
     }
 }
