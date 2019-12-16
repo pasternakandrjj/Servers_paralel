@@ -38,7 +38,7 @@ namespace Servers_paralel.Models
         public int Age { get; set; }
     }
     public class Info
-    {
+    { 
         public int Id { get; set; }
 
         [Required]
@@ -47,10 +47,8 @@ namespace Servers_paralel.Models
 
         [Required]
         public int WhichServer { get; set; }
-        public Info() { }
-        public Info(string bytes)
-        {
-            this.bytes = bytes;
-        }
+
+        [Required]
+        public bool IsDone { get; set; }
     }
 }

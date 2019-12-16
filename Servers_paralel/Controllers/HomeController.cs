@@ -8,12 +8,15 @@ using System.Net;
 using Servers_paralel.Models;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Servers_paralel.Controllers
 {
     public class HomeController : Controller
     {
         public static bool IsFirst = true;
+        UserContext context = new UserContext();
 
         public ActionResult Index()
         {
@@ -109,14 +112,15 @@ namespace Servers_paralel.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult MakeTask(Info model)
         {
-            Info info = new Info(model.bytes);
+            Info info = new Info();
+            info.bytes = model.bytes;
 
             byte[] data = Encoding.Unicode.GetBytes(model.bytes);
             string address = "127.0.0.1"; // адрес сервера 
             Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            int port = 0;
+            int port;
 
-            //info.bytes = model.bytes;
+            int howlongsleep = Int32.Parse(model.bytes);
             if (IsFirst)
             {
                 port = 8005; // порт сервера    
@@ -129,11 +133,6 @@ namespace Servers_paralel.Controllers
             }
             IsFirst = !IsFirst;
 
-            using (UserContext db = new UserContext())
-            {
-                db.Infos.Add(info);
-                db.SaveChanges();
-            }
             IPEndPoint ipPoint = new IPEndPoint(IPAddress.Parse(address), port);
 
             socket.Connect(ipPoint);
@@ -141,7 +140,36 @@ namespace Servers_paralel.Controllers
 
             socket.Shutdown(SocketShutdown.Both);
             socket.Close();
+
+            info.IsDone = false;
+
+            using (UserContext db = new UserContext())
+            {
+                db.Infos.Add(info);
+                db.SaveChanges();
+
+            }
+            Task task = Task.Factory.StartNew(() => todo(howlongsleep, info));
+
             return RedirectToAction("Index");
+        }
+
+        public void todo(int howlong, Info inf)
+        {
+            Thread.Sleep(howlong * 1000);
+            using (UserContext db = new UserContext())
+            {
+                db.Infos.Find(inf.Id).IsDone = true;
+                db.SaveChanges();
+            }
+        }
+
+        [Authorize(Roles = "admin")]
+        [HttpGet]
+        public ActionResult ShowTasks()
+        {
+            IEnumerable<Info> phonesPerPages = context.Infos;
+            return View(phonesPerPages);
         }
     }
 }

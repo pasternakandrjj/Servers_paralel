@@ -14,7 +14,7 @@ namespace Servers_paralel.Models
         public DbSet<Info> Infos { get; set; }
     }
 
-    public class UserDbInitializer : DropCreateDatabaseAlways<UserContext>
+    public class UserDbInitializer : CreateDatabaseIfNotExists<UserContext>
     {
         protected override void Seed(UserContext db)
         {

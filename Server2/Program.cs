@@ -14,7 +14,7 @@ namespace Server2
         static void Main(string[] args)
         {
             bool free = true;
-            int port = 8006; // для прийшому 
+            int port = 8006; // для прийому 
             IPEndPoint ipPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), port);
             Socket listenSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             if (free)

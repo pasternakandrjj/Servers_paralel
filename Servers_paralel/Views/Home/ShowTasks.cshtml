@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Servers_paralel.Models.Info>
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+<h2>ShowTasks</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.bytes)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WhichServer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsDone)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.bytes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WhichServer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsDone)
+            </td>
+        </tr>
+    }
+
+</table>
