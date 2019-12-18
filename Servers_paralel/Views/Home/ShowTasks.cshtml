@@ -15,6 +15,9 @@
         <th>
             @Html.DisplayNameFor(model => model.IsDone)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Percentage)
+        </th>
     </tr>
 
     @foreach (var item in Model)
@@ -28,6 +31,12 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.IsDone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Percentage)%
+            </td>
+            <td>
+                @Html.ActionLink("Pause Task", "Pause", new { id = item.Id })
             </td>
         </tr>
     }

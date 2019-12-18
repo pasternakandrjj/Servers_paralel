@@ -175,8 +175,9 @@
     <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Views\Home\Logoff.cshtml" />
     <Content Include="Views\Home\MakeTask.cshtml" />
-    <Content Include="Views\Home\MakeTask2.cshtml" />
     <Content Include="Views\Home\ShowTasks.cshtml" />
+    <Content Include="Views\Home\Pause.cshtml" />
+    <Content Include="Views\Home\Problems.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

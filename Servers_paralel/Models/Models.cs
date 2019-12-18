@@ -38,7 +38,7 @@ namespace Servers_paralel.Models
         public int Age { get; set; }
     }
     public class Info
-    { 
+    {
         public int Id { get; set; }
 
         [Required]
@@ -50,5 +50,11 @@ namespace Servers_paralel.Models
 
         [Required]
         public bool IsDone { get; set; }
+
+        [Required]
+        public double Percentage { get; set; }
+
+        [Required]
+        public bool IsPaused { get; set; }
     }
 }
